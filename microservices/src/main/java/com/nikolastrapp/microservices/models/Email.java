@@ -4,12 +4,11 @@ package com.nikolastrapp.microservices.models;
 import com.nikolastrapp.microservices.enums.StatusEmail;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @Data
@@ -22,7 +21,7 @@ public class Email implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String ownerRef;
 
