@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @Data
@@ -16,6 +17,7 @@ public class MovieRentDto {
     private final String movieGender;
     @NotNull
     private final Double moviePrice;
-    @NotBlank
-    private final LocalDateTime orderDate;
+
+    @NotNull
+    private final UUID customerId;
 }

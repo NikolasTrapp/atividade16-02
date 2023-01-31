@@ -1,6 +1,7 @@
 package com.nikolastrapp.blockbuster.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,6 +24,7 @@ public class MovieRent {
     @Column(nullable = false)
     private Double moviePrice;
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd-MM-yyyy' 'HH:mm:ss")
     private LocalDateTime orderDate;
 
     @ManyToOne
