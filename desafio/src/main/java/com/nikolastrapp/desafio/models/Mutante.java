@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name="TB_STANDARD")
+@Table(name="TB_MUTANTES")
 public class Mutante implements Serializable {
     private static final long serialVersionUID = 1L;
 
