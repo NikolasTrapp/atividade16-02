@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima tempo</title>
+</head>
+<body>
+
+    <form onsubmit="return false;" method="post">
+
+        <label for="pais">Nome do país</label>
+        <input type="text" id="pais">
+        <br>
+        <label for="Selecione o estado">Selecione o estado</label>
+        <select id="estados">
+            <option value="RO">Rondônia</option>
+            <option value="AC">Acre</option>
+            <option value="AM">Amazonas</option>
+            <option value="RR">Roraima</option>
+            <option value="PA">Pará</option>
+            <option value="AP">Amapá</option>
+            <option value="TO">Tocantins</option>
+            <option value="MA">Maranhão</option>
+            <option value="PI">Piauí</option>
+            <option value="CE">Ceará</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="PB">Paraíba</option>
+            <option value="PE">Pernambuco</option>
+            <option value="AL">Alagoas</option>
+            <option value="SE">Sergipe</option>
+            <option value="BA">Bahia</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="SP">São Paulo</option>
+            <option value="PR">Paraná</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="GO">Goiás</option>
+            <option value="DF">Distrito Federal</option>
+        </select>
+        <br>
+        <label for="municipios">Selecione o municipio</label>
+        <select id="municipios">
+            <option value="0">Selecione o estado</option>
+        </select>
+        <br>
+        <button type="button" id="bt-sub">Pesquisar</button>
+
+    </form>
+
+    <div>
+        <h2 id="data"></h2>
+        <p id="clima"></p>
+        <p id="temp-min"></p>
+        <p id="temp-max"></p>
+    </div>
+
+    <script src="main.js"></script>
+    
+</body>
+</html>
