@@ -39,6 +39,12 @@ public class EmployeeResource {
         return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
     }
 
+    @PostMapping("/addal")
+    public ResponseEntity<List<Employee>> add(@RequestBody List<Employee> employees){
+        List<Employee> newEmployee = employeeService.saveAll(employees);
+        return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
+    }
+
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
         employeeService.delete(id);

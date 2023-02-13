@@ -23,6 +23,10 @@ public class EmployeeService {
         return employeeRepo.findAll();
     }
 
+    public List<Employee> saveAll(List<Employee> employees){
+        return employeeRepo.saveAll(employees);
+    }
+
     public Employee findById(Long id){
         return employeeRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("No employee found with id: " + id));
