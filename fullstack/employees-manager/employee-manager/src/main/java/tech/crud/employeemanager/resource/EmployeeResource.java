@@ -21,7 +21,7 @@ public class EmployeeResource {
         this.employeeService = employeeService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Employee>> findAll(){
         List<Employee> employees = employeeService.findAll();
         return new ResponseEntity<>(employees, HttpStatus.OK);
@@ -36,12 +36,6 @@ public class EmployeeResource {
     @PostMapping("/add")
     public ResponseEntity<Employee> add(@RequestBody Employee employee){
         Employee newEmployee = employeeService.save(employee);
-        return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/addal")
-    public ResponseEntity<List<Employee>> add(@RequestBody List<Employee> employees){
-        List<Employee> newEmployee = employeeService.saveAll(employees);
         return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
     }
 

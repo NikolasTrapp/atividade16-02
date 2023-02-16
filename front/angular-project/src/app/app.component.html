@@ -1,0 +1,11 @@
+<h1>{{title | truncate}}</h1>
+<h1>{{pessoa | json}}</h1>
+<h1>{{date | date}}</h1>
+
+<ul>
+  <li *ngFor="let filme of filmes">{{filme}}</li>
+</ul>
+
+<button (click)="handleEvent()">Click</button>
+
+<input type="text" [(ngModel)]="title" (keydown.l)="handleEvent()">
