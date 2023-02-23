@@ -1,0 +1,257 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#petModal">Add new pet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#ownerModal">Add new Owner</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Main container (pet Cards) -->
+<div id="main-container" class="container">
+  <div *ngFor="let pet of pets" class="card" style="width: 18rem;">
+    <img src="../../assets/dog.jpg" class="card-img-top" alt="Dog image">
+    <div class="card-body">
+      <h5 class="card-title">{{ pet.name }}</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name: {{ pet.name }}</li>
+        <li class="list-group-item">Race: {{ pet.race }}</li>
+        <li class="list-group-item">Heigth: {{ pet.heigth }}</li>
+        <li class="list-group-item">Weight: {{ pet.weight }}</li>
+        <li class="list-group-item">Coat type: {{ pet.coatType }}</li>
+        <li class="list-group-item">Owner: {{ pet.owner.name }}</li>
+      </ul>
+      <a href="#" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#queryRegistersModal"
+        (click)="queryRegisters(pet.id)">Registers</a>
+      <a href="#" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#registerModal">New register</a>
+      <a href="#" class="btn btn-sm btn-danger" (click)="removePet(pet.id)"><i class="icofont-trash"></i></a>
+      <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updatePetModal" (click)="updatePetId(pet.id)"><i class="icofont-pencil-alt-1"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal windows, pup op on click -->
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="registerModalLabel">New register</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #registerForm="ngForm" (ngSubmit)="addRegister(registerForm)">
+          <div class="mb-3">
+            <label for="registerHour" class="form-label">Date and time</label>
+            <input ngModel class="form-control" type="datetime-local" name="registerHour">
+          </div>
+          <div class="mb-3">
+            <label for="registerPet" class="form-label">Pet</label>
+            <select ngModel name="registerPet" class="form-select mb-3" aria-label=".form-select-lg example">
+              <option *ngFor="let pet of pets" value={{pet.id}}>{{pet.name}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="registerTreatment" class="form-label">Treatment Type</label>
+            <select ngModel name="registerTreatment" class="form-select mb-3" aria-label=".form-select-lg example">
+              <option value="CONSULT">Consult</option>
+              <option value="SURGERY">Surgery</option>
+              <option value="VACCINATION">vaccination</option>
+              <option value="SHAVE">Shave</option>
+              <option value="BATH">Bath</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="petModal" tabindex="-1" aria-labelledby="petModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="petModalLabel">New pet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #petForm="ngForm" (ngSubmit)="addPet(petForm)">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input ngModel class="form-control" type="text" name="name">
+          </div>
+          <div class="mb-3">
+            <label for="race" class="form-label">Race</label>
+            <input ngModel class="form-control" type="text" name="race">
+          </div>
+          <div class="mb-3">
+            <label for="heigth" class="form-label">Heigth</label>
+            <input ngModel class="form-control" type="number" name="heigth">
+          </div>
+          <div class="mb-3">
+            <label for="weight" class="form-label">Weight</label>
+            <input ngModel class="form-control" type="number" name="weight">
+          </div>
+          <div class="mb-3">
+            <label for="coatType" class="form-label">Coat Type</label>
+            <select name="coatType" class="form-select mb-3" aria-label=".form-select-lg example">
+              <option value="SHORT">Short</option>
+              <option value="LONG">Long</option>
+              <option value="CURLY">Curly</option>
+              <option value="DOUBLE">Double</option>
+              <option value="SHORT_AND_LONG">Short and Long</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="petOwner" class="form-label">Owner</label>
+            <select id="petOwner" class="form-select mb-3" aria-label=".form-select-lg example">
+              <option *ngFor="let owner of owners" value={{owner.id}}>{{owner.name}}</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button [disabled]="petForm.invalid" type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ownerModal" tabindex="-1" aria-labelledby="ownerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ownerModalLabel">New owner</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #ownerForm="ngForm" (ngSubmit)="addOwner(ownerForm)">
+          <div class="mb-3">
+            <label for="ownerName" class="form-label">Name</label>
+            <input ngModel class="form-control" type="text" name="name">
+          </div>
+          <div class="mb-3">
+            <label for="ownerCpf" class="form-label">CPF</label>
+            <input ngModel class="form-control" type="text" name="cpf">
+          </div>
+          <div class="mb-3">
+            <label for="ownerEmail" class="form-label">Email</label>
+            <input ngModel class="form-control" type="text" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="ownerPhone" class="form-label">Phone</label>
+            <input ngModel class="form-control" type="text" name="phone">
+          </div>
+          <div class="mb-3">
+            <label for="ownerAdress" class="form-label">Adress</label>
+            <input ngModel class="form-control" type="text" name="adress">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button [disabled]="ownerForm.invalid" type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="queryRegistersModal" tabindex="-1" aria-labelledby="queryRegistersModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="queryRegistersModalLabel">Registers</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group list-group-flush">
+          <div *ngIf="registers.length == 0">
+            <span>No registers found!</span>
+          </div>
+          <div *ngFor="let register of registers">
+            <li class="list-group-item">Date: {{ register.registerDate }}</li>
+            <li class="list-group-item">Treatment: {{ register.treatmentType }}</li>
+            <li class="list-group-item">Pet: {{ register.pet.name }}</li>
+            <br>
+          </div>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updatePetModal" tabindex="-1" aria-labelledby="updatePetModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updatePetModalLabel">Edit pet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updatePetForm="ngForm" (ngSubmit)="updatePet(updatePetForm)">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input ngModel="{{ editPet?.name }}" class="form-control" type="text" name="name">
+          </div>
+          <div class="mb-3">
+            <label for="race" class="form-label">Race</label>
+            <input ngModel="{{ editPet?.race }}" class="form-control" type="text" name="race">
+          </div>
+          <div class="mb-3">
+            <label for="heigth" class="form-label">Heigth</label>
+            <input ngModel="{{ editPet?.heigth }}" class="form-control" type="number" name="heigth">
+          </div>
+          <div class="mb-3">
+            <label for="weight" class="form-label">Weight</label>
+            <input ngModel="{{ editPet?.weight }}" class="form-control" type="number" name="weight">
+          </div>
+          <div class="mb-3">
+            <label for="coatType" class="form-label">Coat Type</label>
+            <select ngModel name="coatType" class="form-select mb-3" aria-label=".form-select-lg example">
+              <option value="SHORT">Short</option>
+              <option value="LONG">Long</option>
+              <option value="CURLY">Curly</option>
+              <option value="DOUBLE">Double</option>
+              <option value="SHORT_AND_LONG">Short and Long</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="petOwner" class="form-label">Owner</label>
+            <select ngModel name="owner" class="form-select mb-3" aria-label=".form-select-lg example">
+              <option *ngFor="let owner of owners" value={{owner.id}}>{{owner.name}}</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button [disabled]="updatePetForm.invalid" type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="#" id="updateButton" data-bs-toggle="modal" data-bs-target="#queryRegistersModal" style="display: none;"></a>

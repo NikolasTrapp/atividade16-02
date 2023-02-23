@@ -1,0 +1,15 @@
+#main-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.card{
+    float: left;
+    margin: 10px 20px;
+}
+
+.card-body a{
+    margin: 10px 10px;
+}
